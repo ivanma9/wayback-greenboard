@@ -3,27 +3,31 @@ import { archiveWebsite } from '../../../lib/archiver'
 
 export async function POST (request) {
   try {
-    const { url } = await request.json()
+    const { url, options = {} } = await request.json()
     
     if (!url) {
-      return NextResponse.json(
-        { error: 'URL is required' },
-        { status: 400 }
-      )
+      return NextResponse.json({ error: 'URL is required' }, { status: 400 })
+    }
+
+    // ✅ Preprocess URL before validation
+    let processedUrl = url.trim()
+    
+    // Add https:// if no protocol
+    if (!processedUrl.startsWith('http://') && !processedUrl.startsWith('https://')) {
+      processedUrl = 'https://' + processedUrl
     }
 
     // Validate URL
     try {
-      new URL(url)
+      new URL(processedUrl)
     } catch {
-      return NextResponse.json(
-        { error: 'Invalid URL format' },
-        { status: 400 }
-      )
+      return NextResponse.json({ error: 'Invalid URL format' }, { status: 400 })
     }
 
-    const archive = await archiveWebsite(url)
-    
+    console.log(`📋 Archive request: ${url} → ${processedUrl}`)
+
+    // ✅ Pass the processed URL to archiver
+    const archive = await archiveWebsite(processedUrl, options)
     return NextResponse.json(archive)
   } catch (error) {
     console.error('Archive error:', error)

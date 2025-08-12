@@ -7,22 +7,25 @@ export default function UrlForm () {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    
     if (!url.trim()) return
 
-    // Basic URL validation
     try {
-      new URL(url)
-    } catch {
-      return
-    }
-
-    try {
-      clearError()
-      await archiveUrl(url)
-      setUrl('') // Clear form on success
+      new URL(url) // Validate URL
+      
+      // ✅ Add performance options
+      const options = {
+        maxPages: 50,
+        maxDepth: 3,
+        sameOriginOnly: true,
+        includeAssets: false,   // ✅ Disabled by default
+        concurrency: 5,
+        requestDelay: 100
+      }
+      
+      await archiveUrl(url, options)
+      setUrl('')
     } catch (error) {
-      // Error is handled by the store
+      console.error('Invalid URL:', error)
     }
   }
 
