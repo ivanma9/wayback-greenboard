@@ -90,6 +90,7 @@
 - Archive preview and thumbnail generation
 - Advanced filtering and search within archives
 - Export functionality (PDF, single HTML file)
+- Include grouping per archive url so that it is easier for users to focus on snapshots for one url.
 
 ### 6. **Performance Optimizations**
 - Implement streaming responses for large archives
