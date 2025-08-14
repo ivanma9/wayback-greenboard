@@ -1,12 +1,16 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import UrlForm from './components/UrlForm'
-import ArchiveList from './components/ArchiveList'
 import { useArchiveStore } from './store/archiveStore'
 import GroupedArchiveList from './components/GroupedArchiveList'
+
 export default function HomePage () {
-  const { archives, isLoading } = useArchiveStore()
+  const { archives, isLoading, loadArchives } = useArchiveStore()
+
+  useEffect(() => {
+    loadArchives()
+  }, [loadArchives])
 
   return (
     <div className="space-y-8">
@@ -16,12 +20,7 @@ export default function HomePage () {
         <UrlForm />
       </div>
 
-      <div className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-semibold mb-4">Grouped Archives</h2>
-        <GroupedArchiveList archives={archives} />
-      </div>
-
-      {/* Archives List Section */}
+      {/* Grouped Archives Section */}
       <div className="bg-white rounded-lg shadow p-6">
         <h2 className="text-xl font-semibold mb-4">
           Archived Sites ({archives.length})
@@ -32,7 +31,7 @@ export default function HomePage () {
             <span className="ml-2 text-gray-600">Archiving...</span>
           </div>
         )}
-        <ArchiveList archives={archives} />
+        <GroupedArchiveList archives={archives} />
       </div>
     </div>
   )
