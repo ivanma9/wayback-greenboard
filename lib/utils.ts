@@ -1,10 +1,17 @@
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+
 // Generate a simple unique ID
 export function generateId () {
   return Date.now().toString(36) + Math.random().toString(36).substr(2)
 }
 
 // Format file size
-export function formatFileSize (bytes) {
+export function formatFileSize (bytes: number) {
   if (bytes === 0) return '0 Bytes'
   
   const k = 1024
@@ -15,7 +22,7 @@ export function formatFileSize (bytes) {
 }
 
 // Validate URL
-export function isValidUrl (string) {
+export function isValidUrl (string: string) {
   try {
     new URL(string)
     return true
@@ -25,7 +32,7 @@ export function isValidUrl (string) {
 }
 
 // Extract domain from URL
-export function extractDomain (url) {
+export function extractDomain (url: string) {
   try {
     return new URL(url).hostname
   } catch {

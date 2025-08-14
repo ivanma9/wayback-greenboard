@@ -19,7 +19,7 @@ export default function UrlForm () {
         maxDepth: 3,
         sameOriginOnly: true,
         includeAssets: includeAssets,   // ✅ Use user preference
-        concurrency: 5,
+        concurrency: 10,
         requestDelay: 100
       }
       
