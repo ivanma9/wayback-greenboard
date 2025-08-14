@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import UrlForm from './components/UrlForm'
 import { useArchiveStore } from './store/archiveStore'
 import GroupedArchiveList from './components/GroupedArchiveList'
@@ -15,13 +15,19 @@ export default function HomePage () {
   return (
     <div className="space-y-8">
       {/* URL Input Section */}
-      <div className="bg-white rounded-lg shadow p-6">
+      <div
+        className="rounded-lg shadow p-6"
+        style={{ backgroundColor: 'rgb(232, 233, 191)' }}
+      >
         <h2 className="text-xl font-semibold mb-4">Archive a Website</h2>
         <UrlForm />
       </div>
 
       {/* Grouped Archives Section */}
-      <div className="bg-white rounded-lg shadow p-6">
+      <div
+        className="rounded-lg shadow p-6"
+        style={{ backgroundColor: 'rgb(232, 233, 191)' }}
+      >
         <h2 className="text-xl font-semibold mb-4">
           Archived Sites ({archives.length})
         </h2>

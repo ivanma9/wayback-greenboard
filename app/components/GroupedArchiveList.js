@@ -16,7 +16,10 @@ function ArchiveItem ({ archive, onReArchive }) {
   }
 
   return (
-    <div className="flex items-center justify-between p-3 border border-gray-200 rounded-lg hover:bg-gray-50">
+    <div
+      className="flex items-center justify-between p-3 border border-gray-200 rounded-lg"
+      style={{ backgroundColor: 'rgb(238, 239, 211)' }}
+    >
       <div className="flex items-center space-x-3">
         <Clock className="h-4 w-4 text-gray-400" />
         <div>
@@ -63,8 +66,11 @@ function SiteGroup ({ siteUrl, archives, onReArchive }) {
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
-        <div className="border border-gray-200 rounded-lg overflow-hidden cursor-pointer hover:shadow-md transition-shadow">
-          <div className="flex items-center justify-between p-4 bg-gray-50">
+        <div
+          className="border border-gray-200 rounded-lg overflow-hidden cursor-pointer hover:shadow-md transition-shadow"
+          style={{ backgroundColor: 'rgb(238, 239, 211)' }}
+        >
+          <div className="flex items-center justify-between p-4" style={{ backgroundColor: 'rgb(238, 239, 211)' }}>
             <div className="flex-1 min-w-0">
               <h3 className="text-lg font-medium text-gray-900 truncate">
                 {mostRecent.title || siteUrl}
@@ -78,7 +84,7 @@ function SiteGroup ({ siteUrl, archives, onReArchive }) {
               <Button
                 variant="outline"
                 size="sm"
-                onClick={(e) => {
+                onClick={e => {
                   e.stopPropagation()
                   handleReArchive()
                 }}
@@ -94,7 +100,11 @@ function SiteGroup ({ siteUrl, archives, onReArchive }) {
           </div>
         </div>
       </SheetTrigger>
-      <SheetContent side="right" className="w-[50rem] !max-w-none bg-white border-l border-gray-200">
+      <SheetContent
+        side="right"
+        className="w-[50rem] !max-w-none border-l border-gray-200"
+        style={{ backgroundColor: 'rgb(232, 233, 191)' }}
+      >
         <SheetHeader>
           <SheetTitle className="text-left">
             <div className="truncate">{mostRecent.title || siteUrl}</div>
@@ -108,9 +118,9 @@ function SiteGroup ({ siteUrl, archives, onReArchive }) {
               variant="outline"
               size="sm"
               onClick={handleReArchive}
-              className="h-7"
+              className="h-7 text-green-700 bg-green-600 border-green-600 hover:bg-green-700 text-white"
             >
-              <Archive className="h-3 w-3 mr-1" />
+              <Archive className="h-3 w-3 mr-1 text-white" />
               New Snapshot
             </Button>
           </div>
