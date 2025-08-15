@@ -88,10 +88,10 @@ function SiteGroup ({ siteUrl, archives, onReArchive }) {
                   e.stopPropagation()
                   handleReArchive()
                 }}
-                className="h-8"
+                className="h-8 muted bg-green-600 text-white border-green-600 hover:bg-green-700"
               >
                 <Archive className="h-4 w-4 mr-1" />
-                Re-archive
+                New Snapshot
               </Button>
               <div className="flex items-center justify-center w-8 h-8">
                 <ChevronRight className="h-4 w-4 text-gray-400" />
@@ -163,7 +163,17 @@ export default function GroupedArchiveList ({ archives }) {
 
   const handleReArchive = async (url) => {
     try {
-      await archiveUrl(url)
+      // Use default options for re-archiving, but enable asset downloading
+      const options = {
+        maxPages: 50,
+        maxDepth: 3,
+        sameOriginOnly: true,
+        includeAssets: false,  // Enable asset downloading for re-archives
+        concurrency: 10,
+        requestDelay: 100
+      }
+      
+      await archiveUrl(url, options)
       await loadArchives() // Refresh the list
     } catch (error) {
       console.error('Failed to re-archive:', error)

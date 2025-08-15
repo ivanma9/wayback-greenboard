@@ -25,6 +25,8 @@ export async function POST (request) {
     }
 
     console.log(`📋 Archive request: ${url} → ${processedUrl}`)
+    console.log(`🔧 Options received:`, options)
+    console.log(`🔧 includeAssets: ${options.includeAssets}`)
 
     // ✅ Pass the processed URL to archiver
     const archive = await archiveWebsite(processedUrl, options)

@@ -7,11 +7,11 @@ export const useArchiveStore = create((set, get) => ({
   error: null,
 
   // Archive a new URL
-  archiveUrl: async (url) => {
+  archiveUrl: async (url, options = {}) => {
     set({ isLoading: true, error: null })
     
     try {
-      const response = await axios.post('/api/archive', { url })
+      const response = await axios.post('/api/archive', { url, options })
       const newArchive = response.data
       
       set(state => ({
