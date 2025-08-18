@@ -6,27 +6,10 @@ export async function GET (request, { params }) {
   const { id, path: subPath } = params
   
   try {
-    // ✅ Handle asset requests (e.g., /api/view/[id]/assets/filename.jpg)
+    // ✅ Skip asset requests - let the dedicated asset route handle them
     if (subPath && subPath[0] === 'assets') {
-      const assetPath = path.join(process.cwd(), 'archives', id, ...subPath)
-      
-      try {
-        const assetBuffer = await fs.readFile(assetPath)
-        const ext = path.extname(assetPath).toLowerCase()
-        
-        // ✅ Set appropriate content type based on file extension
-        const contentType = getContentType(ext)
-        
-        return new NextResponse(assetBuffer, {
-          headers: {
-            'Content-Type': contentType,
-            'Cache-Control': 'public, max-age=31536000' // Cache for 1 year
-          }
-        })
-      } catch (error) {
-        console.warn(`Asset not found: ${assetPath}`)
-        return new NextResponse('Asset not found', { status: 404 })
-      }
+      console.log(`📁 Skipping asset request in catch-all route: ${subPath.join('/')}`)
+      return new NextResponse('Asset not found', { status: 404 })
     }
     
     // ✅ Load archive metadata
